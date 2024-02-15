@@ -81,3 +81,28 @@ Make sure to replace `PATH_TO_PROJECT_FOLDER` and `PATH_TO_INPUT_LIBRARY_FOLDER`
 
 After running the benchmarks, analyze the output to compare the performance of the Classic, CAST, and CAST + Alignment methods. This comparison will help identify which method performs best for your specific datasets.
 
+## Visualize the Benchmarking Results 📈
+
+After successfully running the benchmarks, you'll find the results for each method stored in dedicated folders named `results-METHOD_NAME`. To proceed with visualizing these results and comparing the performance across different methods, follow these steps:
+
+### Step 1: Prepare Your Results
+
+Ensure that the results are correctly placed in their respective folders, such as `results-classic`, `results-cast`, and `results-re-cast`.
+
+### Step 2: Adjust the Visualization Script
+
+Navigate to the `benchmarking_plot.py` script located in `/src/plot/`. Adjust the dataset names within this script to align with those present in your benchmark results. This ensures that the script accurately retrieves and processes the data for visualization.
+
+### Step 3: Generate the Plots
+
+Run the `benchmarking_plot.py` script to visualize the results. Use the following command, adjusting the path as necessary:
+
+```bash
+python3 /path/to/MN_benchmarking/src/plot/benchmarking_plot.py
+```
+
+### Example Output
+
+An example output figure will be saved to `results/plot/demo.png`, showcasing the comparative performance of the benchmarked methods. 
+
+![Benchmarking Results Example](results/plot/demo.png)
