@@ -16,14 +16,14 @@ Below is the hierarchical outline of the key directories and files within this p
  ┃ ┣ 📂 Benchmarking
  ┃ ┣ 📂 Transirive_Alignment
  ┃ ┣ 📂 Plot
- ┃ ┗ 📜 utility.ext
+ ┃ ┗ 📜 utility.py
  ┗ 📂 results
    ┣ 📂 results-baseline
    ┣ 📂 results-cast
    ┣ 📂 results-MS2DeepScore
    ┣ 📂 results-re
    ┣ 📂 results-re-cast
-   ┗ 📜 results-ClassyFire
+   ┗ 📂 results-ClassyFire
 📜 requirement.txt
 📜 README.md
 ```

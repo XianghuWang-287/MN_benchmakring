@@ -19,15 +19,17 @@ from rdkit.Chem.rdMolDescriptors import CalcMolFormula
 import requests
 import plotly.express as px
 from IPython.display import HTML
-from utility import *
 from pyteomics import mgf
-from Classic import *
 from multiprocessing import Pool
 import collections
 from typing import List, Tuple
 import pickle
 import os
 import argparse
+import sys
+from pathlib import Path
+from Classic import *
+from utility import *
 
 
 
@@ -45,8 +47,8 @@ if __name__ == '__main__':
     for library in libraries:
         library = library.strip('\n')
         print("starting benchmarking library:"+library)
-        summary_file_path = "./data/summary/"+library+"_summary.tsv"
-        merged_pairs_file_path = "./data/merged_pairs_ms2deepscore/"+library+"_merged_pairs.tsv"
+        summary_file_path = "../../data/summary/"+library+"_summary.tsv"
+        merged_pairs_file_path = "../../data/merged_pairs/"+library+"_merged_pairs.tsv"
         cluster_summary_df = pd.read_csv(summary_file_path)
         all_pairs_df = pd.read_csv(merged_pairs_file_path, sep='\t')
         # all_pairs_df = all_pairs_df.apply(pd.to_numeric, errors='coerce')
@@ -76,7 +78,7 @@ if __name__ == '__main__':
                 all_pairs_filter_number = [len(x) for x in components]
                 df_all_pairs_filter = pd.DataFrame(list(zip(score_all_pairs_filter_list, all_pairs_filter_number)),columns=['score', 'number'])
                 results_df_list.append(df_all_pairs_filter)
-        result_file_path = "./results_classic_ms2deepscore/"+library+"_classic_benchmark.pkl"
+        result_file_path = "../../results/results-classic/"+library+"_classic_benchmark.pkl"
         with open(result_file_path, 'wb') as file:
             pickle.dump(results_df_list, file)
 
