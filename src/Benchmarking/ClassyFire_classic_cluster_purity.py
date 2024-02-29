@@ -108,7 +108,7 @@ def CalN50(lst,toatl_num, percentage):
 
 if __name__ == '__main__':
     #pass arguments
-    parser = argparse.ArgumentParser(description='Using realignment method to reconstruct the network')
+    parser = argparse.ArgumentParser(description='Using ClassyFIre results to benchmark the network')
     parser.add_argument('--input', type=str,required=True,default="input_library.txt", help='input libraries')
     args = parser.parse_args()
     input_lib_file = args.input
@@ -121,7 +121,7 @@ if __name__ == '__main__':
         library = library.strip('\n')
         print("starting benchmarking library:" + library)
         summary_file_path = "./data/summary/" + library + "_summary.tsv"
-        merged_pairs_file_path = "./data/merged_paris/" + library + "_merged_pairs.tsv"
+        merged_pairs_file_path = "./data/merged_pairs/" + library + "_merged_pairs.tsv"
         classifer_file_path = "./"+library+"_classifier_results.csv"
 
         cluster_summary_df = pd.read_csv(summary_file_path)

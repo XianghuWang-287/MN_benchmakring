@@ -41,31 +41,34 @@ def convert_extension(input_string,threshold, new_extension):
 if __name__ == '__main__':
     #pass arguments
     parser = argparse.ArgumentParser(description='Using realignment method to reconstruct the network')
-    parser.add_argument('-m', type=str, required=True, default="spec.mgf", help='input mgf filename')
-    parser.add_argument('--input', type=str,required=True,default="input_library", help='input libraries')
+    parser.add_argument('--input', type=str,required=True, help='input libray name')
+    parser.add_argument('--method', type=str, required=True,default="MS2DeepScore", help='realignment method')
     args = parser.parse_args()
-    input_lib_file = args.input
-    merged_file = args.m
+    input_lib_name = args.input
+    benchmark_method = args.method
 
     #read libraries from input file
     # with open(input_lib_file,'r') as f:
     #     libraries = f.readlines()
 
-    summary_file_path = "./data/summary/"+input_lib_file.replace(".mgf", "") + "_summary.tsv"
+    summary_file_path = "../../data/summary/"+input_lib_name + "_summary.tsv"
     # merged_pairs_file_path = "./data/merged_paris/"+library+"_merged_pairs.tsv"
     cluster_summary_df = pd.read_csv(summary_file_path)
-    merged_file = merged_file+input_lib_file
+    if benchmark_method == "MS2DeepScore":
+        merged_file = "../../results/MS2DeepScore/"+input_lib_name
+    else:
+        merged_file = "../../data/Network_barebone"+input_lib_name
     print(merged_file)
     threshold_list = [0.5,0.6,0.7,0.8,0.9,0.91,0.92,0.93,0.94,0.95,0.96,0.97,0.98,0.99,0.991,0.992,0.993,0.994,0.995,0.996,0.997]
     N20_list=[]
     score_list=[]
-    merged_file_original = "./data/merged_paris/"+input_lib_file.replace(".mgf", "") + "_merged_pairs.tsv"
+    merged_file_original = "../../data/merged_pairs/"+input_lib_name + "_merged_pairs.tsv"
     original_all_pairs_df = pd.read_csv(merged_file_original, sep='\t')
     G_original = nx.from_pandas_edgelist(original_all_pairs_df, "CLUSTERID1", "CLUSTERID2", "Cosine")
     num_of_nodes = G_original.number_of_nodes()
     print(num_of_nodes)
     for threshold in threshold_list:
-        merged_pairs_file_path = convert_extension(merged_file,threshold,"tsv")
+        merged_pairs_file_path = merged_file + "_" + str(threshold) + ".tsv"
         print(merged_pairs_file_path)
         all_pairs_df = pd.read_csv(merged_pairs_file_path, sep='\t')
         G_all_pairs = nx.from_pandas_edgelist(all_pairs_df, "CLUSTERID1", "CLUSTERID2", "Cosine")
@@ -88,8 +91,8 @@ if __name__ == '__main__':
         print(np.array([weighted_average(x, 'score', 'number') for x in results_df_list]))
         N20_list.append(np.array([cal_N50(x, num_of_nodes, 0.2) for x in results_df_list])[0])
         score_list.append(np.array([weighted_average(x, 'score', 'number') for x in results_df_list])[0])
-    print(N20_list)
-    print(score_list)
+    print("N20 list:",N20_list)
+    print("Network Accuracy Score list:",score_list)
 
 
 

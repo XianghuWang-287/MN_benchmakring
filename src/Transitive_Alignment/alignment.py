@@ -221,9 +221,9 @@ if __name__ == '__main__':
     for library in libraries:
         library = library.strip('\n')
         print("starting align library:"+library)
-        summary_file_path = "./data/summary/"+library+"_summary.tsv"
-        merged_pairs_file_path = "./data/merged_paris/"+library+"_merged_pairs.tsv"
-        mgf_file_path = "./data/converted/"+library+"_converted.mgf"
+        summary_file_path = "../../data/summary/"+library+"_summary.tsv"
+        merged_pairs_file_path = "../../data/merged_pairs/"+library+"_merged_pairs.tsv"
+        mgf_file_path = "../../data/converted/"+library+"_converted.mgf"
         cluster_summary_df = pd.read_csv(summary_file_path)
         all_pairs_df = pd.read_csv(merged_pairs_file_path, sep='\t')
         G_all_pairs = nx.from_pandas_edgelist(all_pairs_df, "CLUSTERID1", "CLUSTERID2", "Cosine")
@@ -259,8 +259,8 @@ if __name__ == '__main__':
         align_peak_running_list = [result[4] for result in results]
         print("key path total running time:", sum(key_path_running_list))
         print("align peak running time:", sum(align_peak_running_list))
-        # result_file_path = "./alignment_results/" + library + "_realignment.pkl"
-        # with open(result_file_path, 'wb') as f:
-        #     pickle.dump(results, f)
+        result_file_path = "../../results/alignment_results/" + library + "_realignment.pkl"
+        with open(result_file_path, 'wb') as f:
+            pickle.dump(results, f)
     print("Finish align all libraries")
 

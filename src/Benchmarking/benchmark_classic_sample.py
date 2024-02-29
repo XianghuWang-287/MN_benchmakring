@@ -56,7 +56,7 @@ if __name__ == '__main__':
         library = library.strip('\n')
         print("starting benchmarking library:"+library)
         summary_file_path = "./data/summary/"+library+"_summary.tsv"
-        merged_pairs_file_path = "./data/merged_paris/"+library+"_merged_pairs.tsv"
+        merged_pairs_file_path = "./data/merged_pairs/"+library+"_merged_pairs.tsv"
         cluster_summary_df = pd.read_csv(summary_file_path)
         all_pairs_df = pd.read_csv(merged_pairs_file_path, sep='\t')
         G_all_pairs = nx.from_pandas_edgelist(all_pairs_df, "CLUSTERID1", "CLUSTERID2", "Cosine")

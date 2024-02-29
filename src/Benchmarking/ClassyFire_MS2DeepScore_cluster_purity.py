@@ -121,7 +121,7 @@ def CalN50(lst,toatl_num, percentage):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Using realignment method to reconstruct the network')
+    parser = argparse.ArgumentParser(description='Using ClassyFIre results to benchmark the network')
     parser.add_argument('-m', type=str, required=True, default="spec.mgf", help='input mgf filename')
     parser.add_argument('--input', type=str,required=True,default="input_library", help='input libraries')
     args = parser.parse_args()
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     threshold_list = [0.9,0.91,0.92,0.93,0.94,0.95,0.96,0.97,0.98,0.99,0.991,0.992,0.993,0.994,0.995,0.996,0.997,0.998,0.999,0.9995,0.9996,0.9997,0.9998,0.9999]
     N20_list=[]
     score_list=[]
-    merged_file_original = "./data/merged_paris/"+input_lib_file.replace(".mgf", "") + "_merged_pairs.tsv"
+    merged_file_original = "./data/merged_pairs/"+input_lib_file.replace(".mgf", "") + "_merged_pairs.tsv"
     original_all_pairs_df = pd.read_csv(merged_file_original, sep='\t')
     G_original = nx.from_pandas_edgelist(original_all_pairs_df, "CLUSTERID1", "CLUSTERID2", "Cosine")
     num_of_nodes = G_original.number_of_nodes()
